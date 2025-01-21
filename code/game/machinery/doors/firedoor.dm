@@ -24,7 +24,7 @@
 	layer = BELOW_OPEN_DOOR_LAYER
 	closingLayer = CLOSED_FIREDOOR_LAYER
 	assemblytype = /obj/structure/firelock_frame
-	armor = list(MELEE = 30,  BULLET = 30, LASER = 20, ENERGY = 20, BOMB = 10, BIO = 100, RAD = 100, FIRE = 95, ACID = 70, STAMINA = 0, BLEED = 0)
+	armor_type = /datum/armor/door_firedoor
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	air_tight = TRUE
 	open_speed = 2
@@ -36,6 +36,17 @@
 	var/list/affecting_areas
 	var/list/access_log
 	var/process_ticker //Ratelimit process to one check ~5 process ticks
+
+
+/datum/armor/door_firedoor
+	melee = 30
+	bullet = 30
+	laser = 20
+	energy = 20
+	bomb = 10
+	rad = 100
+	fire = 95
+	acid = 70
 
 /obj/machinery/door/firedoor/Initialize(mapload)
 	. = ..()
@@ -161,6 +172,12 @@
 			return
 	to_chat(user, "<span class='warning'>You try to pull the card reader. Nothing happens.</span>")
 
+/obj/machinery/door/firedoor/on_emag(mob/user)
+	..()
+	playsound(src, 'sound/machines/terminal_error.ogg', 50, 1)
+	do_sparks(5, TRUE, src)
+	open()
+
 /obj/machinery/door/firedoor/proc/log_opening(obj/item/card/id/I, mob/user, safe)
 	var/safestate = "UNK_STATE:"
 	switch(safe)
@@ -279,7 +296,7 @@
 
 
 /obj/machinery/door/firedoor/close()
-	if(HAS_TRAIT(loc, TRAIT_FIREDOOR_STOP))
+	if(HAS_TRAIT(loc, TRAIT_FIREDOOR_STOP) || (obj_flags & EMAGGED))
 		return
 	if(!density && !operating) //This is hacky but gets the sound to play on time.
 		playsound(src, 'sound/machines/firedoor_close.ogg', 30, 1)
@@ -532,6 +549,8 @@
 			. += "<span class='notice'>The maintenance panel is missing <i>wires</i> and the circuit board is <b>loosely connected</b>.</span>"
 		if(CONSTRUCTION_NOCIRCUIT)
 			. += "<span class='notice'>There are no <i>firelock electronics</i> in the frame. The frame could be <b>cut</b> apart.</span>"
+	if(obj_flags & EMAGGED)
+		. += "<span class='warning'>Its access panel is smoking slightly.</span>"
 
 /obj/structure/firelock_frame/update_icon()
 	..()

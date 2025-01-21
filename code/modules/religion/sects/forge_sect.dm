@@ -1,7 +1,7 @@
 /datum/religion_sect/forge_sect
 	name = "Forge"
 	quote = "Work the metal of the gods. Touch divinity."
-	desc = "A sect dedicated to forging minerals together to create rare and valuable materials. "
+	desc = "A sect dedicated to forging minerals together to create rare and valuable items. "
 	tgui_icon = "hammer" // https://fontawesome.com/icons/
 	alignment = ALIGNMENT_NEUT
 	desired_items = list(/obj/item/stack/ore = "with ore") //Items you can offer into the altar by clicking
@@ -261,7 +261,7 @@
 
 /datum/religion_rites/create_golem
 	name = "Shape Golem"
-	desc = "Spend fifteen adamantine to create a blank golem shell."
+	desc = "Spend fifteen adamantine to create a blank golem shell. Cheaper than crafting one."
 	ritual_length = 20 SECONDS
 	ritual_invocations = list(
 		"I call upon the fires of your forge ...",

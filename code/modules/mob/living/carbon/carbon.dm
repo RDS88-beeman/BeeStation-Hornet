@@ -69,6 +69,12 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 					return TRUE
 	return ..()
 
+/mob/living/carbon/CtrlShiftClick(mob/user)
+	..()
+	if(iscarbon(user))
+		var/mob/living/carbon/carbon_user = user
+		carbon_user.give(src)
+
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	var/hurt = TRUE
 	if(!throwingdatum || throwingdatum.force <= MOVE_FORCE_WEAK)
@@ -611,17 +617,6 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 		. += E.tint
 	else
 		. += INFINITY
-
-/mob/living/carbon/get_permeability_protection(list/target_zones = list(HANDS = 0, CHEST = 0, GROIN = 0, LEGS = 0, FEET = 0, ARMS = 0, HEAD = 0))
-	for(var/obj/item/I in get_equipped_items())
-		for(var/zone in target_zones)
-			if(I.body_parts_covered & zone)
-				target_zones[zone] = max(1 - I.permeability_coefficient, target_zones[zone])
-	var/protection = 0
-	for(var/zone in target_zones)
-		protection += target_zones[zone]
-	protection *= INVERSE(target_zones.len)
-	return protection
 
 //this handles hud updates
 /mob/living/carbon/update_damage_hud()

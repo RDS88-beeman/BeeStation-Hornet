@@ -8,7 +8,15 @@
 	icon = 'icons/turf/shuttle.dmi'
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	max_integrity = 500
-	armor = list(MELEE = 100,  BULLET = 10, LASER = 10, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 50, ACID = 70, STAMINA = 0, BLEED = 0) //default + ignores melee
+	armor_type = /datum/armor/structure_shuttle
+
+
+/datum/armor/structure_shuttle
+	melee = 100
+	bullet = 10
+	laser = 10
+	fire = 50
+	acid = 70
 
 /obj/structure/shuttle/engine
 	name = "engine"
@@ -144,7 +152,7 @@
 	desc = "A very large bluespace engine used to propel very large ships."
 	bound_width = 64
 	bound_height = 64
-	appearance_flags = 0
+	appearance_flags = LONG_GLIDE
 
 /obj/structure/shuttle/engine/huge
 	name = "engine"
@@ -154,7 +162,7 @@
 	desc = "An extremely large bluespace engine used to propel extremely large ships."
 	bound_width = 96
 	bound_height = 96
-	appearance_flags = 0
+	appearance_flags = LONG_GLIDE
 
 /obj/structure/shuttle/engine/hugeionengine
 	name = "Nanotrasen MkIII BPDT engine"
