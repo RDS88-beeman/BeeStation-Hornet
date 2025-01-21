@@ -44,13 +44,40 @@
 	name = "adamantine pendant"
 	desc = "A smooth pendant, looped on an adamantine chain and containing a bluespace crystal. It glitters with a gentle, cyan light."
 	icon_state = "pendant"
-	armor = list(MELEE = 10,  BULLET = 5, LASER = 0, ENERGY = 0, BOMB = 20, BIO = 0, RAD = 5, FIRE = 0, ACID = 0, STAMINA = 10, BLEED = 20)
+	armor_type = /datum/armor/accessory_pendant
+	attachment_slot = null
+
+/datum/armor/accessory_pendant
+	melee = 10
+	bullet = 5
+	laser = 0
+	energy = 0
+	bomb = 20
+	bio = 0
+	rad = 5
+	fire = 0
+	acid = 0
+	stamina = 10
+	bleed = 20
 
 /obj/item/clothing/head/helmet/adamantine_crown
 	desc = "A crown composed of adamantine spikes. It's a tuning fork for curses and hexes."
 	icon_state = "adamantine-crown"
 	item_state = "adamantine-crown"
-	armor = list(MELEE = 15,  BULLET = 10, LASER = 20, ENERGY = 30, BOMB = 20, BIO = 0, RAD = 0, FIRE = 0, ACID = 50, STAMINA = 10, BLEED = 10)
+	armor_type = /datum/armor/adamantine_crown
+
+/datum/armor/adamantine_crown
+	melee = 15
+	bullet = 10
+	laser = 20
+	energy = 30
+	bomb = 20
+	bio = 0
+	rad = 0
+	fire = 0
+	acid = 50
+	stamina = 10
+	bleed = 10
 
 /obj/item/clothing/head/helmet/adamantinecrown/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
